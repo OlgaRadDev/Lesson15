@@ -120,6 +120,19 @@ Burger.prototype.getTotalPrice = function () {
     return totalPrice;
 };
 
+function Hamburger(name,size) {
+    Burger.call(this, name, size);
+
+}
+
+Hamburger.prototype = Object.create(Burger.prototype);
+Hamburger.prototype.addStuffing = function (stuffing) {
+    if (stuffing.name !== STUFFING_CHEESE.name) {
+        return this.stuffing.push(stuffing);
+    }
+
+};
+
 const cheeseBurger = new Burger('Cheeseburger',SIZE_MEDIUM);
 console.log(cheeseBurger.getName());
 cheeseBurger.addStuffing(STUFFING_CHEESE);
@@ -140,12 +153,13 @@ cheeseBurger.addStuffing(STUFFING_CHEESE);
 console.log('Price with 2 cheese: ' + cheeseBurger.getTotalPrice());
 console.log('---------------------------');
 
-const hamburger = new Burger('Hamburger', SIZE_LARGE);
+const hamburger = new Hamburger('Hamburger', SIZE_LARGE);
 console.log(hamburger.getName());
 hamburger.addStuffing(BEEF_CHOP);
 hamburger.addTopping(TOPPING_MAYO);
 hamburger.addTopping(TOPPING_KETCHUP);
 hamburger.addStuffing(BEEF_CHOP);
+hamburger.addStuffing(STUFFING_CHEESE);
 console.log('Hamburger with two beef chop');
 console.log('Total calories: '+ hamburger.getSumCalories());
 console.log('Total price '+ hamburger.getTotalPrice());
